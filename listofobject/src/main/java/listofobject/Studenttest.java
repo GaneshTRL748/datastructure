@@ -1,16 +1,17 @@
 package listofobject;
 
 import java.util.Scanner;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Collections;
 import java.util.ArrayList;
-class student  implements Comparable <student> {
+class Student  implements Comparable <Student> {
 	Logger l= Logger.getLogger("com.api.jar");
 	Scanner p1=new Scanner(System.in);
     String studentname;
     double gpa;
     int age;
-    student()
+    Student()
     {
     	
     }
@@ -24,11 +25,11 @@ class student  implements Comparable <student> {
     	this.gpa=p1.nextDouble();
     	
     }
-    public student getter()
+    public Student getter()
     {
     	return this;
     }
-    public int compareTo(student s1)
+    public int compareTo(Student s1)
     {
         if(this.gpa>s1.gpa)
         {
@@ -46,28 +47,27 @@ public class Studenttest {
 	public static void main(String[] arg){
 		Logger l= Logger.getLogger("com.api.jar");
 		Scanner p1=new Scanner(System.in);
-	      ArrayList<student> a1=new ArrayList<student>();
+	      ArrayList<Student> a1=new ArrayList<Student>();
 	      l.info("Enter the no of object:");
 	     int num=p1.nextInt();
 	     for(int i=0;i<num;i++)
 	     {
-	        student a=new student();
+	        Student a=new Student();
 	        a.setter();
 	        a1.add(a);
 	     }
-	     student a2=new student();
 	     l.info("The student details:");
 	     for(int i=0;i<num;i++)
 	     {
-	    	 a2=a1.get(i).getter();
-	    	 l.info("Name:"+a2.studentname+" Age:"+a2.age+" Gpa:"+a2.gpa);
+	    	 Student a2=a1.get(i).getter();
+	    	 l.log(Level.INFO,()->"Name:"+a2.studentname+" Age:"+a2.age+" Gpa:"+a2.gpa);
 	     }
 	     Collections.sort(a1);
 	     l.info("After sorting:");
 	     for(int i=0;i<num;i++)
 	     {
-	    	 a2=a1.get(i).getter();
-	    	 l.info("Name:"+a2.studentname+" Age:"+a2.age+" Gpa:"+a2.gpa);
+	    	 Student a2=a1.get(i).getter();
+	    	 l.log(Level.INFO,()->"Name:"+a2.studentname+" Age:"+a2.age+" Gpa:"+a2.gpa);
 	     }
 	    }
 }
