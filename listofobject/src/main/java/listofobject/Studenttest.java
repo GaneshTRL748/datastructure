@@ -1,35 +1,78 @@
 package listofobject;
-import java.util.Scanner;
-import java.util.Collections;
+
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-public class Studenttest {
-	public static void main(String[] arg){
-		PrintStream out=new PrintStream(new FileOutputStream(FileDescriptor.out));
-		Scanner p=new Scanner(System.in);
-		 ArrayList<Student> a1=new ArrayList<Student>();
-	      out.println("Enter the no of object:");
-	     int num=p.nextInt();
-	     for(int i=0;i<num;i++)
-	     {
-	        Student a=new Student();
-	        a.setter();
-	        a1.add(a);
-	     }
-	     out.println("The student details:");
-	     for(int i=0;i<num;i++)
-	     {
-	    	 Student a2=a1.get(i).getter();
-	    	 out.println("Name:"+a2.studentname+" Age:"+a2.age+" Gpa:"+a2.gpa);
-	     }
-	     Collections.sort(a1);
-	     out.println("After sorting:");
-	     for(int i=0;i<num;i++)
-	     {
-	    	 Student a2=a1.get(i).getter();
-	    	 out.println("Name:"+a2.studentname+" Age:"+a2.age+" Gpa:"+a2.gpa);
-	     }
-	    }
+import java.util.Scanner;
+
+class Student  implements Comparable <Student> {
+	 PrintStream out=new PrintStream(new FileOutputStream(FileDescriptor.out));
+	Scanner p1=new Scanner(System.in);
+    String studentname;
+    double gpa;
+    int age;
+    Student()
+    {
+    
+    }
+    public void setter()
+    {
+    	out.println("Enter the studentname:");
+    	this.studentname=p1.next();
+    	out.println("Enter the age:");
+    	this.age=Integer.parseInt(getnumber());
+    	out.println("Enter the gpa:");
+    	this.gpa=Double.parseDouble(getgpa());
+    	
+    }
+    public Student getter()
+    {
+    	return this;
+    }
+    public int compareTo(Student s1)
+    {
+        if(this.gpa>s1.gpa)
+        {
+        	return -1;
+        }
+        else if(this.gpa<s1.gpa)
+        {
+        	return 1;
+        }
+        else {
+        return 0;
+        }
+        
+    }
+    String getnumber()
+    {
+    	String num=p1.next();
+    	try {
+    	       Double.parseDouble(num);
+    	       return num;
+    	}
+    	catch(Exception e)
+    	{
+    		out.print("It should be a number");
+    		return getnumber();
+    	}
+    }
+    
+    public String getgpa()
+    {
+    	String num=p1.next();
+    	try {
+    		if(Double.parseDouble(num)<=10)
+    		{
+    			return num;
+    		}
+    		else {
+    			return getgpa();
+    		}
+    	}
+    	catch(Exception e)
+    	{
+    		return getgpa();
+    	}
+    }
 }
